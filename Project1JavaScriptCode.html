@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Project 1 program</title>
+
+</head>
+<body>
+<p>This program will take the following string, convert it to an array, 
+remove any duplicate words and display the new array.</p>
+
+<p>JavaScript is case sensitive which means that JavaScript is 
+read as a different word than javascript which is read as a different 
+word than Javascript which is different from JAVASCRIPT or jAVAsCRIPT 
+and still different from jAVASCRIPT but this program will read them all 
+the same because it is converting all letters to lower case</p>
+ 
+<p>Click "Show array" to display the array without any duplicate words.</p>
+
+<button onclick="readText(text)">Show array</button>
+
+<p id="demo"></p>
+<script type='text/javascript'>		//The script tag tells program that we are switching over to the JavaScript code
+text = ("JavaScript is case sensitive which means that JavaScript is " +  //no declaration means global variable
+			"read as a different word than javascript which is read as a " +
+			"different word than Javascript which is different from JAVASCRIPT " +
+			"or jAVAsCRIPT and still different from jAVASCRIPT but this program " +
+			"will read them all the same because it is converting all letters to " +
+			"lower case");
+
+function readText (txt){				//A function performs a task
+	txt = txt.toLowerCase();			//converts to lower case
+	var wordList= txt.split(" ");		//.split takes a string and breaks it into an array. parameter indicates the divider
+	var list=[];						//array called list to receive new array without duplicates
+	wordList.sort();					//alphabetises the wordList array
+		
+	var firstWord = wordList.shift();	//assigns the first word in the wordList array to the variable firstWord
+	do{
+		let temp1 = firstWord;			//assigns the first word from the array to temp1
+		let temp2 = wordList.shift();	//assigns the second word from the array to temp2
+		if(temp1==temp2)				//compares the two words
+			firstWord=temp2;			//if the two words are the same then the first one is discarded and temp2 is assigned to firstWord
+		else
+			list.push(temp1);			//if the two words are different the first is pushed onto the new array named list
+			firstWord=temp2;			//the first word is discarded and temp2 is assigned to firstWord
+	}while(wordList.length>0)			//loop continues to until the wordList array is empty
+	
+	/*
+	The shift method removes the first word of the array and moves the rest up a so the first word is 
+	still at the 0 index.  When the loop restarts temp1 is the word that was originally the second word
+	and temp2 is the word that was originally the third word. 
+	*/
+	
+	
+	document.getElementById("demo").innerHTML = list.join(", ");//prints the new array to the screen
+	
+
+}	
+
+
+</script>
+
+</body>
+</html>
